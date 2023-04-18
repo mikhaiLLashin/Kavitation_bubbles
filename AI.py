@@ -143,7 +143,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs):
 
 
 model_ft = models.vgg19_bn(pretrained=True)
-model_ft.classifier[6].out_features = 3
+model_ft.classifier[6].out_features = 7
 n_inputs = model_ft.classifier[6].in_features
 
 model_ft.classifier[6] = nn.Sequential(
@@ -169,13 +169,13 @@ model_ft = train_model(model_ft, criterion, optimizer_ft, exp_lr_scheduler,
                        num_epochs=100)
 
 # saving model
-torch.save(model_ft, 'model/model_torch.pth')
+torch.save(model_ft, 'model/kav_model.pth')
 
 # Accuracy on the test data
 correct_it = 0
 all_iter = 0
-class_correct = list(0. for i in range(3))
-class_total = list(0. for i in range(3))
+class_correct = list(0. for i in range(7))
+class_total = list(0. for i in range(7))
 
 with torch.no_grad():
     for i, (inputs, labels) in enumerate(dataloaders['test']):
